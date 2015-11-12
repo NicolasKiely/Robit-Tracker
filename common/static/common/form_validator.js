@@ -21,7 +21,8 @@
     validator_defaults: {
       formsel: 'form',
       multibind: false,
-      logsel: ''
+      logsel: '',
+      logstatus: 'default'
     },
 
     /* Enumeration of logging statuses */
@@ -96,14 +97,14 @@
    */
   plugin.log = function(context, message, errStat){
     if ('__logger__' in context){
-      context.__logger__.text(message);
+      $(context.__logger__.children()[0]).text(message);
 
       if (errStat){
         /* Set alert status of logging element */
         if ('__logstatus__' in context){
-          context.__logger__.removeClass('alert-'+ context.__logstatus__);
+          context.__logger__.removeClass('panel-'+ context.__logstatus__);
         }
-        context.__logger__.addClass('alert-'+errStat);
+        context.__logger__.addClass('panel-'+errStat);
         context.__logstatus__ = errStat;
       }
 
@@ -125,6 +126,7 @@
       __formsel__: plugin.validator_defaults.formsel,
       __binding__: [],
       __multibind__: plugin.validator_defaults.multibind,
+      __logstatus__: plugin.validator_defaults.logstatus,
       __prebinding__: {},
     };
     if (template){
@@ -197,7 +199,7 @@
   /* Bind validation generators to jquery */
   var congen = plugin.generate_validator_context;
   $.fn.validator = congen;
-  $.fn.validate = congen('form').logger('.form-log').validate;
+  $.fn.validate = congen('form').logger('.log-panel').validate;
 
 
   /***************************************************************************\
