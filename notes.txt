@@ -1,0 +1,52 @@
+Django mangement commands:
+  - Startup server: python manage.py runserver <port number>
+  - Create applications: python manage.py startapp <app name>
+  - Model migrations: python manage.py makemigrations <app name>
+  - Envoke Migrations: python manage.py migrate
+  - Check Migration: python manage.py sqlmigrate <app name> <migration #>
+
+
+Applications:
+  - Public: Misc site functionality for non-logged in users
+  - Login: User-specific functionality
+  - Robot: Manages Robot data and permissions
+  - Schematic: Manages Map Schematics
+  - Tracer: Manages a robot's traced session
+
+
+Site map:
+  Public App:
+    /
+      - Public facing page
+
+    /directory/user/
+      - Directory of users
+
+    /directory/bot/
+      - Directory of public bots
+
+    /login/
+      - Logs user in
+
+
+  User App:
+    /user/<user id>/
+      - Redirects to dasboard if this user is logged in, else public
+
+    /user/<user id>/public
+      - Public facing user info
+      - Lists public bots
+
+    /user/<user id>/dashboard
+      - User dashboard
+
+
+  Bot App:
+    /bot/<user id>/<bot id>/
+      - Redirects to dashboard if this owner is logged in, else public
+
+    /bot/<user id>/<bot id>/public
+      - Public facing bot info
+
+    /bot/<user id>/<bot id>/dashboard
+      - Bot dashboard
