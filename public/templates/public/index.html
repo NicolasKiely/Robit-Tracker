@@ -1,0 +1,17 @@
+{% extends "common/base.html" %}
+{% load base %}
+
+
+{% block html_body %}
+  {% open_box %}
+    <h2>News</h2>
+  {% close_box %}
+
+  {% open_box %}
+    <h2>Directories</h2>
+    <ul>
+      <li><a href="/directory/user/">Lookup users</a></li>
+      <li><a href="/directory/bot/">Lookup bots</a></li>
+    </ul>
+  {% close_box %}
+{% endblock %}
