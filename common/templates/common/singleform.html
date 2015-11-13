@@ -28,14 +28,16 @@
       {% endfor %}
 
       <!-- Helpful error message logging -->
-      <div class="row">
-        <div class="col-sm-offset-3 col-sm-8 panel panel-default log-panel">
+      <div class="row"><div class="col-sm-offset-3 col-sm-8">
+        <div class="panel panel-default log-panel">
           <div class="panel-heading"></div>
         </div>
-      </div>
+      </div></div>
 
       <!-- Submit button -->
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-primary pull-right">
+        Submit
+      </button>
     </form>
   {% close_box %}
 {% endblock %}

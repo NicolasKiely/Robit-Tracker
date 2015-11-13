@@ -19,20 +19,21 @@
 
     /** Default values for validator contexts */
     validator_defaults: {
-      formsel: 'form',
-      multibind: false,
-      logsel: '',
-      logstatus: 'default'
+      logsel: '', // default form log-panel selector
+      formsel: 'form', // default form selector
+      subsel: 'button[type="submit"]', // default form submit selector
+      multibind: false, // Whether or not to apply multibind selectors
+      logstatus: 'default' // Default log panel status
     },
 
-    /* Enumeration of logging statuses */
+    /** Enumeration of logging statuses */
     log_status: {
       info: 'info',
-      good: 'success',
-      success: 'success',
-      warning: 'warning',
       warn: 'warning',
-      error: 'danger'
+      good: 'success',
+      error: 'danger',
+      success: 'success',
+      warning: 'warning'
     }
   };
 
@@ -66,11 +67,11 @@
         /* Bind element updates to check context */
         var elementChangeCallback = (function (ctx, bnd){
           return function(e){
-            console.log("Element "+ bnd.selector +" updated!");
             var res = bnd.callback(bnd.element);
             if (res){
               /* Error found, log it */
               plugin.log(ctx, res, plugin.log_status.error);
+              plugin.lock(ctx);
 
             } else {
               /* Error not found, check other conditions */
@@ -90,6 +91,48 @@
         context.__prebinding__[selector] = [callback];
       }
     }
+  };
+
+  /**
+   * Keeps submission locked
+   */
+  plugin.lock = function(context){
+    var els = $(context.__subsel__);
+    var elnum = context.__multibind__ ? els.length : 1;
+    for (var i=0; i<elnum; i++){
+      $(els[i]).attr('disabled', 'true')
+        .text("X")
+        .removeClass('active')
+        .addClass('disabled');
+    }
+  };
+
+  /**
+   * Attempts to unlock a form
+   */
+  plugin.attempt_unlock = function(context){
+    /* Run over bindings */
+    for (var b in context.__binding__){
+      /* Evaluate callback on bound element */
+      var binding = context.__binding__[b];
+      var res = binding.callback(binding.element);
+      if (res){
+        /* Error encountered */
+        plugin.log(context, res, plugin.log_status.error);
+        plugin.lock(context);
+        return;
+      }
+    }
+    /* No errors encountered, unlock form */
+    var els = $(context.__subsel__);
+    var elnum = context.__multibind__ ? els.length : 1;
+    for (var i=0; i<elnum; i++){
+      $(els[i]).removeAttr('disabled')
+        .text("Submit")
+        .removeClass('disabled')
+        .addClass('active');
+    }
+    plugin.log(context, 'Ready to Submit', plugin.log_status.success);
   };
 
   /**
@@ -123,6 +166,7 @@
     /* Register new validation instance */
     var validator_context = {
       __logsel__: plugin.validator_defaults.logsel,
+      __subsel__: plugin.validator_defaults.subsel,
       __formsel__: plugin.validator_defaults.formsel,
       __binding__: [],
       __multibind__: plugin.validator_defaults.multibind,
