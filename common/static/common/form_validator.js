@@ -273,6 +273,9 @@
       }
       /* Clear out prebinding object */
       context.__prebinding__ = {};
+
+      /* Apply first checks */
+      plugin.attempt_unlock(context);
     }
   });
 
