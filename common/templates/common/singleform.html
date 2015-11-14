@@ -14,7 +14,10 @@
 {% block html_body %}
   {% open_box %}
     <h2>Create Account</h2>
-    <form id="form" class="form-horizontal" role="form">
+    <form
+        id="form" class="form-horizontal" role="form"
+        action="{{action}}" method="post"
+    > {% csrf_token %}
       {% for f in form %}
       <div class="form-group">
         <label class="col-sm-3 control-label">{{ f.label }}</label>
