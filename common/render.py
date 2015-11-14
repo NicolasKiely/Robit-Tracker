@@ -4,6 +4,7 @@ from django.shortcuts import render
 def singleform(request, context):
     ''' Sets defaults for individual form inputs '''
     context.setdefault('form', [])
+    context.setdefault('action', '')
     context.setdefault('validators', [])
     for form in context['form']:
         form.setdefault('label', '')
