@@ -7,21 +7,48 @@
  *  - repass
  */
 
-jQuery().validate({
-  '#username': function(x){
-    console.log('Checking user name');
-    return '';
-  },
-  '#email': function(x){
-    console.log('Checking email address');
-    return '';
-  },
-  '#password': function(x){
-    console.log('Checking passwords');
-    return 'blarg';
-  },
-  '#repass': function(x){
-    console.log('Checking passwords');
-    return '';
+/**
+ * Checks to make sure password fields match each other
+ */
+function checkPassword(){
+  var passVal = $('#password').val();
+  var repassVal = $('#repass').val();
+
+  if (passVal.length < 6){
+    return 'Password must be at least six characters long';
+
+  } else if (passVal !== repassVal){
+    return 'Password fields do not match';
   }
+}
+
+/**
+ * Checks to make sure username is okay
+ */
+function checkUsername(x){
+  var username = $(x).val();
+  if (username.length < 5){
+    return 'User name must be at least 5 characters long';
+  } else if (!/^[a-zA-Z_]+$/.test(username)){
+    return 'Bad user name. Valid charcters: Letters, numbers, and _';
+  } else if (username.length > 64){
+    return 'User name may not be more than 64 characters long';
+  }
+}
+
+/**
+ * Checks email address
+ */
+function checkEmail(x){
+  if (!/.+@.+/.test($(x).val())){
+    return 'Invalid email address';
+  }
+}
+
+
+jQuery().validate({
+  '#username': checkUsername,
+  '#email': checkEmail,
+  '#password': checkPassword,
+  '#repass': checkPassword
 });
