@@ -51,4 +51,4 @@ jQuery().validate({
   '#email': checkEmail,
   '#password': checkPassword,
   '#repass': checkPassword
-});
+}).prepost('/signup/validate');

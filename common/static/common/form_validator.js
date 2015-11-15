@@ -236,6 +236,16 @@
       }
     })(validator_context);
 
+    /**
+     * Sets the ajax prepost checker
+     */
+    validator_context.prepost = (function(ctx){
+      return function(jqargs){
+        ctx.__prepost__ = jqargs;
+        return ctx;
+      }
+    })(validator_context);
+
     return validator_context;
   };
 
