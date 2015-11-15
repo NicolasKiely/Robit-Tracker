@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
 import common.render
 from common.settings import get_page_config
 
@@ -19,7 +19,7 @@ def form(request):
 
 def validate(request):
     ''' Signup form validation handler '''
-    return HttpResponse('{"status": "error"}')
+    return JsonResponse({"status": "error", "message": "Test Case"})
 
 
 def submit(request):

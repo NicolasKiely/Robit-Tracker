@@ -123,6 +123,38 @@
         return;
       }
     }
+    /* Check for prepost backend checking */
+    if (context.__prepost__){
+      plugin.log(context, 'Checking ...', plugin.log_status.warn);
+      var sendData = {};
+      var elInputs = $(context.__formsel__ +' input');
+      elInputs.each(function (i, elIn){
+        var $elIn = $(elIn);
+        var elInType = $elIn.attr('type');
+        var elInName = $elIn.attr('name');
+        if (elInType !== 'hidden' && elInType !== 'password'){
+          sendData[elInName] = encodeURIComponent($elIn.val());
+        }
+      });
+      $.getJSON(context.__prepost__, sendData, function(data){
+        if (data.status.toLowerCase() === 'error'){
+          var msg = data.message || 'Form validation failed!';
+          plugin.log(context, msg, plugin.log_status.error);
+
+        } else {
+          plugin.unlock(context);
+        }
+      });
+
+    } else {
+      plugin.unlock(context);
+    }
+  };
+
+  /**
+   * Unlocks a form
+   */
+  plugin.unlock = function(context){
     /* No errors encountered, unlock form */
     var els = $(context.__subsel__);
     var elnum = context.__multibind__ ? els.length : 1;
@@ -169,6 +201,7 @@
       __subsel__: plugin.validator_defaults.subsel,
       __formsel__: plugin.validator_defaults.formsel,
       __binding__: [],
+      __prepost__: '',
       __multibind__: plugin.validator_defaults.multibind,
       __logstatus__: plugin.validator_defaults.logstatus,
       __prebinding__: {},
