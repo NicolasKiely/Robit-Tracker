@@ -317,8 +317,10 @@
       /* Clear out prebinding object */
       context.__prebinding__ = {};
 
-      /* Apply first checks */
-      plugin.attempt_unlock(context);
+      /* Apply first checks if no page-errors are baked in */
+      if (!context.__logger__.hasClass('panel-danger')){
+        plugin.attempt_unlock(context);
+      }
     }
   });
 

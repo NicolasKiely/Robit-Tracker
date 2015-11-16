@@ -1,0 +1,14 @@
+{% extends "common/base.html" %}
+{% load base %}
+
+{% block html_body %}
+  {% open_box %}
+    <h2>Account Created</h2>
+    <p>
+      Your account <b>{{ user.username }}</b> has been successfully created
+      and logged in.
+    </p>
+    <p><a href="/">Return to Home Page</a></p>
+    <p><a href="/user/{{ user.id }}/">Go to Your Profile page</a></p>
+  {% close_box %}
+{% endblock %}

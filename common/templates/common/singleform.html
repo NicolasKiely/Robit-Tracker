@@ -32,9 +32,15 @@
 
       <!-- Helpful error message logging -->
       <div class="row"><div class="col-sm-offset-3 col-sm-8">
+        {% if error %}
+        <div class="panel panel-danger log-panel">
+          <div class="panel-heading">{{ error }}</div>
+        </div>
+        {% else %}
         <div class="panel panel-default log-panel">
           <div class="panel-heading"></div>
         </div>
+        {% endif %}
       </div></div>
 
       <!-- Submit button -->

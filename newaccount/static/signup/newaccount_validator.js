@@ -29,7 +29,7 @@ function checkUsername(x){
   var username = $(x).val();
   if (username.length < 5){
     return 'User name must be at least 5 characters long';
-  } else if (!/^[a-zA-Z_]+$/.test(username)){
+  } else if (!/^[A-Za-z0-9_]+$/.test(username)){
     return 'Bad user name. Valid charcters: Letters, numbers, and _';
   } else if (username.length > 64){
     return 'User name may not be more than 64 characters long';
@@ -51,4 +51,4 @@ jQuery().validate({
   '#email': checkEmail,
   '#password': checkPassword,
   '#repass': checkPassword
-}).prepost('/signup/validate');
+}).prepost('/signup/validate/');
