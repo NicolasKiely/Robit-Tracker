@@ -35,8 +35,26 @@
         </a>
       </div>
       <div id="page-nav"><ul class="nav navbar-nav navbar-right">
+        {% if user %}
+        <!-- Account dropdown menu -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Hello <b>{{ user.username }}</b><span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'user:dashboard' %}">My Dashboard</a></li>
+            <li><a href="{% url 'user:settings' %}">My Settings</a></li>
+            <li><a href="{% url 'index' %}">Site Home</a></li>
+            <li><a href="{% url 'account:logout' %}">Logout</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <!-- Login/Signup menu -->
         <li><a id="signup-link" href="/signup/">Sign Up</a></li>
-        <li><a id="login-link" href="/login/">Login</a></li>
+        <li><a id="login-link" href="{% url 'account:login-form' %}">
+          Login
+        </a></li>
+        {% endif %}
       </ul></div>
     </div></nav>
     {% endblock %}
