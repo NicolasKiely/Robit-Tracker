@@ -26,5 +26,5 @@ def get_page_config(request, **kwargs):
     for key, val in kwargs.iteritems():
         conf['page'][key] = val
     if request.user.is_authenticated():
-        conf['user'] = request
+        conf['user'] = request.user
     return conf
