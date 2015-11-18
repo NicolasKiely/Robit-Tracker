@@ -31,14 +31,13 @@ Site map:
 
   User App:
     /user/<user id>/
-      - Redirects to dasboard if this user is logged in, else public
+      - Shows user's public profile
 
-    /user/<user id>/public
-      - Public facing user info
-      - Lists public bots
+    /user/settings/
+      - Edits user account settings
 
-    /user/<user id>/dashboard
-      - User dashboard
+    /user/dashboard/
+      - Shows user's dashboard
 
 
   Bot App:
