@@ -1,0 +1,13 @@
+{% extends "common/base.html" %}
+{% load base %}
+
+{% block html_body %}
+  {% open_box %}
+    <h2>Logged In</h2>
+    <p>
+      Welcome <b>{{ user.username }}</b>.
+    </p>
+    <p><a href="/">Return to Home Page</a></p>
+    <p><a href="/user/{{ user.id }}/">Go to Your Profile page</a></p>
+  {% close_box %}
+{% endblock %}
