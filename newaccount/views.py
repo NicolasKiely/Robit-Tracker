@@ -33,6 +33,7 @@ def form(request):
     context['form'] = new_account_form_fields
     context['action'] = new_account_action
     context['validators'] = new_account_validators
+    context['title'] = 'Create Account'
     return common.render.singleform(request, context)
 
 
@@ -64,6 +65,7 @@ def submit(request):
         context['form'] = new_account_form_fields
         context['action'] = new_account_action
         context['validators'] = new_account_validators
+        context['title'] = 'Create Account'
         context['error'] = msg
         return common.render.singleform(request, context)
     return render(request, 'signup/finished.html', context)

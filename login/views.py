@@ -45,6 +45,7 @@ def login_inactive(request):
 def __login_page(request, error=''):
     context=get_page_config(request, title='Account Login')
     context['action'] = '/account/auth/'
+    context['title'] = 'Log In'
     context['form'] = [
         {'label': 'User Name', 'name': 'username'},
         {'label': 'Password', 'type': 'password', 'name': 'password'}

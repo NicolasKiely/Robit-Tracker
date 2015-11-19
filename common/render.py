@@ -7,6 +7,8 @@ def singleform(request, context):
     context.setdefault('error', '')
     context.setdefault('action', '')
     context.setdefault('validators', [])
+    if ('page' in context) and ('title' in context['page']):
+        context.setdefault('title', context['page']['title'])
     for form in context['form']:
         form.setdefault('label', '')
         form.setdefault('type', 'text')
