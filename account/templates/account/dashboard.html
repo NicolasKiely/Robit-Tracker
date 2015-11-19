@@ -1,0 +1,17 @@
+{% extends "common/base.html" %}
+{% load base %}
+{# User dashboard page #}
+
+{% block html_body %}
+  {% open_box %}
+    <!-- User's bot collection -->
+    <h2>Your Robots</h2>
+    <a href="{% url 'robot:new' %}">Register New Robot</a>
+  {% close_box %}
+
+  {% open_box %}
+    <!-- User's schematics collection -->
+    <h2>Your Schematics</h2>
+    <a href="{% url 'schematic:new' %}">Create New Schematic</a>
+  {% close_box %}
+{% endblock %}
