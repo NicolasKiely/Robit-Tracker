@@ -8,7 +8,7 @@
       Your account <b>{{ user.username }}</b> has been successfully created
       and logged in.
     </p>
-    <p><a href="/">Return to Home Page</a></p>
-    <p><a href="/user/{{ user.id }}/">Go to Your Profile page</a></p>
+    <p><a href="{% url 'index' %}">Return to Home Page</a></p>
+    <p><a href="{% url 'user:dashboard' %}">Go to Your Dashboard</a></p>
   {% close_box %}
 {% endblock %}

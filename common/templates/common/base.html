@@ -30,7 +30,7 @@
     {% block html_body_header %}
     <nav class="navbar navbar-default"><div class="container-fluid">
       <div class="navbar-header" id="page-title">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="{% url 'index' %}">
           {{ page.site }}{% if page.title %}: {{ page.title }}{% endif %}
         </a>
       </div>
@@ -50,7 +50,9 @@
         </li>
         {% else %}
         <!-- Login/Signup menu -->
-        <li><a id="signup-link" href="/signup/">Sign Up</a></li>
+        <li><a id="signup-link" href="{% url 'signup:signup-form' %}">
+          Sign Up
+        </a></li>
         <li><a id="login-link" href="{% url 'account:login-form' %}">
           Login
         </a></li>
