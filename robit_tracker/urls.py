@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'', include('public.urls')),
     url(r'^account/', include('login.urls', namespace='account')),
     url(r'^robot/', include('robot.urls', namespace='robot')),
-    url(r'^schema/', include('schematic.urls', namespace='schema')),
+    url(r'^schema/', include('schematic.urls', namespace='schematic')),
     url(r'^signup/', include('newaccount.urls', namespace='signup')),
     url(r'^user/', include('account.urls', namespace='user')),
     url(r'^admin/', include(admin.site.urls))
